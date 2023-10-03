@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+  <title>User Directory</title>
+</head>
+
+<body>
+
+<div class="container">
+
+  <h3>User Directory</h3>
+  <hr>
+  <a th:href="@{/admin/add-user}"
+     class="btn btn-primary btn-sm mb-3">
+    Add User
+  </a>
+  <table class="table table-bordered table-striped">
+    <thead class="table-dark">
+    <tr>
+      <th>Username</th>
+      <th>Email</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Age</th>
+      <th>Status</th>
+      <th>Department ID</th>
+      <th>Role</th>
+      <th>Function</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="user : ${users}">
+
+      <td th:text="${user.username}" />
+      <td th:text="${user.email}" />
+      <td th:text="${user.first_name}"/>
+      <td th:text="${user.last_name}" />
+      <td th:text="${user.age}" />
+      <td th:text="${user.is_active}"/>
+      <td th:text="${user.department_id}">
+      <td th:text="${user.role}">
+      <td>
+        <a th:href="@{/admin/update-user(id=${user.id})}" class="btn btn-info btn-sm">
+          Update
+        </a>
+        <a th:href="@{/admin/change-password-user(id=${user.id})}" class="btn btn-info btn-sm">
+          Change Password
+        </a>
+      <form th:action="@{/admin/delete-user(id=${user.id})}" method="post" onclick="if(!(confirm('Ban chac chua'))) return false" class="btn btn-danger btn-sm">
+        <input type="submit" value="Delete">
+        </form>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <a th:href="@{/admin/department-list}">Department List</a>
+  <br>
+  <a th:href="@{/admin/dashboard}">Back to the Dashboard</a>
+
+</div>
+
+</body>
+</html>

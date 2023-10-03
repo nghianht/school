@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+  <title>Department List</title>
+</head>
+
+<body>
+
+<div class="container">
+
+  <h3>Department Directory</h3>
+  <hr>
+  <a th:href="@{/admin/add-department}"
+     class="btn btn-primary btn-sm mb-3">
+    Add Department
+  </a>
+  <table class="table table-bordered table-striped">
+    <thead class="table-dark">
+    <tr>
+      <th>Name</th>
+      <th>ID</th>
+      <th>Function</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="department : ${departments}">
+      <td th:text="${department.name}" />
+      <td th:text="${department.id}" />
+      <td>
+        <a th:href="@{/admin/show-department(id=${department.id})}" class="btn btn-info btn-sm">
+          Show Departments
+        </a>
+        <a th:href="@{/admin/update-department(id=${department.id})}" class="btn btn-info btn-sm">
+          Update
+        </a>
+        <form th:action="@{/admin/delete-department(id=${department.id})}" method="post" onclick="if(!(confirm('Ban chac chua'))) return false" class="btn btn-danger btn-sm">
+          <input type="submit" value="Delete">
+        </form>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <a th:href="@{/admin/user-list}">Redirect to User List</a>
+  <br>
+  <a th:href="@{/admin/dashboard}">Back to Dashboard</a>
+</div>
+</body>
+</html>
